@@ -1,0 +1,24 @@
+---
+  - name: install npm
+    apt: 
+      name: npm
+      state: present
+    become: true
+
+  - name: install build essential
+    apt:
+      name: build-essential
+      state: present
+    become: true
+
+  - name: change the node version
+    npm:
+      name: n
+      global: yes
+      state: present
+
+  - name: nodejs version
+    shell: n 8.9.3
+    become: true
+
+    

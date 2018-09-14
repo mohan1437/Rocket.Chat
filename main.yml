@@ -1,0 +1,6 @@
+---
+# main tasks file for rock 
+  - include_tasks: mongo.yml
+  - include_tasks: npm.yml
+  - include_tasks: replica.yml
+  - include_tasks: rkt.yml

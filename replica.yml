@@ -1,0 +1,21 @@
+---
+##Setup MongoDB Replica Set##
+
+  - name: copy mongod.conf file 
+    copy:
+      src: /home/mohan/work/Rocket/rock/templates/mongod.conf.j2
+      dest: /etc/mongod.conf
+    become: true
+
+  - name: restart mongod service 
+    service:
+      name: mongod
+      state: restarted
+    become: true
+
+  - name: Start the mangoDB shell and initiate the replica set
+    command: "{ item }"
+    with_items:
+      - mongo
+      - rs.initiate()
+    become: true

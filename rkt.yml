@@ -1,0 +1,31 @@
+---
+## install Rocket##
+  - name: Download Rocket.Chat
+    unarchive:
+      src: https://releases.rocket.chat/latest/download
+      dest: /home/ubuntu
+      remote_src: yes
+
+
+  - name: mv
+    command: mv /home/ubuntu/bundle Rocket.Chat
+    become: true
+
+  - name: MongoDb server ready up and running
+    command: npm install
+    args:
+      chdir: /home/ubuntu/Rocket.Chat/programs/server
+    become: true
+    
+
+  - name: setting environment variable
+    copy:
+      src: /home/mohan/work/Rocket/rock/templates/environment.j2
+      dest: /etc/environment
+    become: true
+
+  - name: running server with nohup
+    command: "nohup node /home/ubuntu/Rocket.Chat/main.js &"
+    args:
+      chdir: /home/ubuntu/Rocket.Chat
+    become: true
